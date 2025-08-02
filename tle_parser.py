@@ -19,5 +19,7 @@ def import_tle( DATA_DIR = DATA_DIR, URL = URL ):
 
     print(f'Файл сохранён по пути {imported_tle_path}')
 
+    return None
+
 if __name__ == "__main__":
     import_tle()
