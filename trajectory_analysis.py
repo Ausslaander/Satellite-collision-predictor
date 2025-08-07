@@ -1,5 +1,5 @@
-from data_worker import load_noisy_data
+from data_worker import load_ellipse_data
 import pandas as pd
 
-def analysis():
-    df = load_noisy_data()
+def analyze_collisions():
+    df, filename = load_ellipse_data()
