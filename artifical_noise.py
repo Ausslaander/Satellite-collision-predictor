@@ -17,7 +17,8 @@ def add_noise(sigma=0.5, samples_per_sat=100, time_utc=(2025, 8, 1, 12, 0, 0)):
     all_noisy_points = []
 
     for idx, row in df.iterrows():
-        sat = EarthSatellite.from_omm_dataframe(df.iloc[[idx]], ts)
+        sat = EarthSatellite.from_omm(element_dict=df.iloc[idx].to_dict(), ts=ts)
+
         pos = sat.at(t).position.km
 
         noise = np.random.normal(0, sigma, size=(samples_per_sat, 3))
@@ -33,9 +34,12 @@ def add_noise(sigma=0.5, samples_per_sat=100, time_utc=(2025, 8, 1, 12, 0, 0)):
             })
     noisy_df = pd.DataFrame(all_noisy_points)
     NOISE_DATA_DIR.mkdir(parents=True, exist_ok=True)
-    noisy_csv_path = NOISE_DATA_DIR / "starlink_noisy_positions.csv"
+    noisy_csv_path = NOISE_DATA_DIR / "noisy_positions.csv"
     noisy_df.to_csv(noisy_csv_path, index=False)
     print(f"Шумные координаты сохранены в {noisy_csv_path}")
 
     return None
+
+if __name__ == "__main__":
+    add_noise()
 
