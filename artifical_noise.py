@@ -8,7 +8,7 @@ NOISE_DATA_DIR = Path("data/noisy_data")
 DATA_DIR = Path("data/imported_tle")
 
 def add_noise(sigma=0.5, samples_per_sat=100, time_utc=(2025, 8, 1, 12, 0, 0)):
-    df = pd.read_csv(load_raw_data())
+    df = load_raw_data()
 
     ts = load.timescale()
     t = ts.utc(*time_utc)
